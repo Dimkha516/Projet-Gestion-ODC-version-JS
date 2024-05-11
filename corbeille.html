@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/apprenants.css" />
+  </head>
+  <body>
+    <div id="popup" class="modal">
+      <input type="checkbox" id="popup_checkbox" />
+      <form class="modal-content">
+        <div class="head">
+          <a href="#" class="close">×</a>
+          <h1>Nouvel Apprenant</h1>
+        </div>
+        <div class="section informations-perso">
+          <div class="stutdent">
+            <div class="line flex">
+              <span><i class="fa-solid fa-1"></i></span>
+              <span>Informations Perso.</span>
+              <span></span>
+              <span
+                ><i
+                  class="fa-solid fa-2"
+                  style="color: #038e89; background: #f2f1ff"
+                ></i
+              ></span>
+              <span>Informations Supplémentaires</span>
+            </div>
+            <div class="input-group">
+              <div class="stutdent-image">
+                <div class="file">
+                  <div class="error" style="font-size: 1em"></div>
+                </div>
+                <div class="img">
+                  <img
+                    id="studentImage"
+                    src="/assets/img/profile.jpeg"
+                    alt="Image"
+                  />
+                </div>
+              </div>
+              <div>
+                <label for="image">Image</label>
+                <input type="text" id="image" placeholder="Entrer le lien " />
+                <span class="error" id="profilError">error</span>
+              </div>
+              <div>
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" placeholder="Entrer le nom" />
+                <span class="error" id="nomError">error</span>
+              </div>
+              <div>
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" placeholder="Entrer le prénom" />
+                <span class="error" id="prenomError">error</span>
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input type="text" id="email" placeholder="Entrer l'email" />
+                <span class="error" id="emailError">error</span>
+              </div>
+              <div>
+                <label for="telephone">Telephone</label>
+                <input
+                  type="text"
+                  id="telephone"
+                  placeholder="Entrer le telephone"
+                />
+                <span class="error" id="phoneError">error</span>
+              </div>
+              <div>
+                <label for="sexe">Sexe</label>
+                <select name="sexe" id="sexe">
+                  <option value="masculin">Masculin</option>
+                  <option value="feminin">Feminin</option>
+                </select>
+                <span class="error" id="genreError">Error genre</span>
+              </div>
+              <div class="date-input-container">
+                <label for="dateNaissance">Date de Naissance</label>
+                <input type="date" name="dateNaissance" id="dateNaissance" />
+                <span class="error" id="dateNaissanceError">error</span>
+              </div>
+              <div>
+                <label for="lieu_naissance">Lieu de Naissance</label>
+                <input
+                  type="text"
+                  id="lieu_naissance"
+                  placeholder="Entrer le lieu de naissance"
+                />
+                <span class="error" id="lieuError">error</span>
+              </div>
+              <div>
+                <label for="cni">N° CNI</label>
+                <input
+                  type="text"
+                  id="cni"
+                  placeholder="Entrer le numero de votre carte d'identité"
+                />
+                <span class="error" id="cniError">error</span>
+              </div>
+              <div>
+                <label for="referentiel">Réferentiel</label>
+                <select name="" id="studentRef">
+                  <option value="Dev-Web">Dev-Web</option>
+                  <option value="Dev-Data">Dev-Data</option>
+                  <option value="Ref-Dig">Ref-Dig</option>
+                </select>
+                <span class="error" id="refError">error</span>
+              </div>
+              <div>
+                <label for="promo">Promo</label>
+                <select name="" id="studentPromo">
+                  <option value="1">Promotion 1</option>
+                  <option value="2">Promotion 2</option>
+                  <option value="3">Promotion 3</option>
+                  <option value="4">Promotion 4</option>
+                </select>
+                <span class="error" id="promoError">error</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+
+<!-- <tbody>
+  <tr class="line">
+    <td class="bloc">
+      <div class="col-bas">
+        <img src="assets/img/icone.png" width="30px" />
+      </div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas" style="color: rgb(29, 109, 29)">sow</div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas" style="color: rgb(29, 109, 29)">bobo</div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas email">s@g.com</div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas">M</div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas">770552626</div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas">DEV</div>
+    </td>
+    <td class="bloc">
+      <div class="col-haut"></div>
+      <input type="checkbox" id="my-checkbox-0" />
+      <label for="my-checkbox-0"></label>
+    </td>
+  </tr>
+
+  <tr class="line">
+    <td class="bloc">
+      <div class="col-bas">
+        <img src="assets/img/icone.png" width="30px" />
+      </div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas" style="color: rgb(29, 109, 29)">sow</div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas" style="color: rgb(29, 109, 29)">bobo</div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas email">s@g.com</div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas">M</div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas">770552626</div>
+    </td>
+    <td class="bloc">
+      <div class="col-bas">DEV</div>
+    </td>
+    <td class="bloc">
+      <div class="col-haut"></div>
+      <input type="checkbox" id="my-checkbox-0" />
+      <label for="my-checkbox-0"></label>
+    </td>
+  </tr>
+</tbody> -->
+
+<!--  
+- Editer la colonne nom ou prenom ou telephone ou genre ou email (par double cliques) et Cliquer sur entrer uniquement pour enregistrer
+- Ajouter bouton éditer sur chaque ligne pour tout éditer avec modal
+- Tri sur toutes les colonnes du tableau (par nom,prenom,telephone,genre, email et référentiel) en cliquant sur l’entête
+-->
