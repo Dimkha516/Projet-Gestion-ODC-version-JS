@@ -100,16 +100,6 @@ let validProfil,
 const profilCheck = (val) => {
   const validLink = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i;
   const profilErr = document.getElementById("profilError");
-  // if (val.length <= 10) {
-  //   profilErr.style.visibility = "visible";
-  //   profilErr.textContent = "Fichier photo invalide";
-  //   validProfil = null;
-  // } else {
-  //   profilErr.style.visibility = "hidden";
-  //   profilErr.textContent = "";
-  //   console.log("photo OK");
-  //   validProfil = val;
-  // }
   if (!val.match(validLink)) {
     profilErr.style.visibility = "visible";
     profilErr.textContent = "Fichier photo invalide";
@@ -277,15 +267,12 @@ const dateNaissCheck = (val) => {
     dateNaissError.textContent = "Champ vide. Entrez données valides";
     nextStep.style.visibility = "hidden";
     validDateNaiss = null;
-  }
-  else if(!val.match(regexDate)){
+  } else if (!val.match(regexDate)) {
     dateNaissError.style.visibility = "visible";
     dateNaissError.textContent = "Format date invalide. Entrez Jour/Mois/Année";
     nextStep.style.visibility = "hidden";
     validDateNaiss = null;
-  }
-  
-  else if(isMinor(val)){
+  } else if (isMinor(val)) {
     dateNaissError.style.visibility = "visible";
     dateNaissError.textContent = "L'âge max est de 30 ans";
     nextStep.style.visibility = "hidden";
@@ -379,7 +366,6 @@ const addStudent = () => {
     };
     dataStorage.students.push(newStudent);
     window.history.back();
-    
   } else {
     alert("Vérifiez les infos saisies");
     console.log("Des données invalides");
@@ -886,24 +872,6 @@ const promosTab = {
       dateDebut: "21-01-2021",
       dateFin: "21-01-2022",
     },
-    {
-      id: 4,
-      libelle: "Promo 4",
-      dateDebut: "21-01-2022",
-      dateFin: "21-01-2023",
-    },
-    {
-      id: 5,
-      libelle: "Promo 5",
-      dateDebut: "21-01-2023",
-      dateFin: "21-01-2024",
-    },
-    {
-      id: 6,
-      libelle: "Promo 6",
-      dateDebut: "21-01-2024",
-      dateFin: "21-01-2025",
-    },
   ],
 };
 
@@ -951,57 +919,153 @@ function updatePromosBox() {
 
 updatePromosBox();
 
+//----------------------------------AJOUT DE PROMOS
 const popupPromo = document.querySelector(".popupPromo");
 const promoForm = document.getElementById("taskForm");
 const numberPromoArea = document.querySelector(".promoNumber");
-const promoStartDate = document.querySelector(".dateFin");
-const promoEndDate = document.querySelector(".dateFin");
+const promoStart = document.querySelector(".dateDebut");
+const promoEnd = document.querySelector(".dateFin");
 
 const addPromoPopup = document.querySelector(".popup-content");
 const promoNumberError = document.querySelector(".promoNumberError");
 const promoStartError = document.querySelector(".promoStartError");
 const promoEndError = document.querySelector(".promoEndError");
+const promoDurationError = document.querySelector(".promoDurationError");
+const inputsAreas = document.querySelectorAll(
+  "input[type=text],input[type=number]"
+); 
 
-function searchId(val) {
-  promosList.forEach((promo) => {
-    if (promo.id === val) {
-      return false;
-      // console.log("Trouvé");
+//------TABLEAU DES NUMÉROS PROMOS QUI EXISTE DEJAS:
+let idPromoTab = [];
+promosList.forEach((promo) => {
+  idPromoTab.push(promo.id);
+});
+
+//--------FONCTION DE COMPARAISON DE DATES
+function differenceMois(date1, date2) {
+  const [jour1, mois1, annee1] = date1.split("/").map(Number);
+  const [jour2, mois2, annee2] = date2.split("/").map(Number);
+
+  const diffAnnees = annee2 - annee1;
+  const diffMois = mois2 - mois1;
+  const diffJours = jour2 - jour1;
+
+  return diffAnnees * 12 + diffMois + (diffJours >= 0 ? 0 : -1);
+}
+
+let validPromoNumber, validPromoStart, validPromoEnd, validPromoDuration;
+let newPromoNumber, newPromoStart, newPromoEnd, newPromoDuration;
+
+const promoNumberControl = () => {
+  numberPromoArea.addEventListener("input", (e) => {
+    if (e.target.value === "" || numberPromoArea.value <= 0) {
+      promoNumberError.style.visibility = "visible";
+      promoNumberError.textContent = "Une promo ne peut pas être nulle ou vide";
+      validPromoNumber = false;
+      newPromoNumber = null;
+    }
+    //
+    else if (idPromoTab.includes(parseInt(e.target.value))) {
+      promoNumberError.style.visibility = "visible";
+      promoNumberError.textContent = "Cette promo exite dèjas";
+      validPromoNumber = false;
+      newPromoNumber = null;
+      //
     } else {
-      return true;
-      // console.log("Non trouvé");
+      promoNumberError.style.visibility = "hidden";
+      promoNumberError.textContent = "";
+      validPromoNumber = true;
+      newPromoNumber = e.target.value;
     }
   });
-}
+};
+
+const promoStartControl = () => {
+  promoStart.addEventListener("input", (e) => {
+    var regexDate =
+      /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/(19|20)\d{2}$/;
+    if (!e.target.value.match(regexDate)) {
+      promoStartError.style.visibility = "visible";
+      promoStartError.textContent = "Format date invalide. entrez J/M/A";
+      validPromoStart = false;
+      newPromoStart = null;
+    } else {
+      promoStartError.style.visibility = "hidden";
+      promoStartError.textContent = "";
+      validPromoStart = true;
+      newPromoStart = e.target.value;
+    }
+  });
+};
+
+const promoEndControl = () => {
+  promoEnd.addEventListener("input", (e) => {
+    var regexDate =
+      /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/(19|20)\d{2}$/;
+    if (!e.target.value.match(regexDate)) {
+      promoEndError.style.visibility = "visible";
+      promoEndError.textContent = "Format date invalide. entrez J/M/A";
+      validPromoEnd = false;
+      newPromoEnd = null;
+    } else {
+      promoEndError.style.visibility = "hidden";
+      promoEndError.textContent = "";
+      validPromoEnd = true;
+      newPromoEnd = e.target.value;
+    }
+  });
+};
+
+inputsAreas.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    switch (e.target.id) {
+      case "promo":
+        promoNumberControl();
+      case "date1":
+        promoStartControl();
+      case "date2": {
+        promoEndControl();
+      }
+      default:
+        null;
+    }
+  });
+});
 
 promoForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (numberPromoArea.value <= 0) {
-    promoNumberError.style.visibility = "visible";
-    promoNumberError.textContent = "numéro promo vide";
-  }
-  //
-  // else if(searchId(numberPromoArea)) {
-  //   promoNumberError.style.visibility = "visible";
-  //   promoNumberError.textContent = "Cette promo existe";
-  // }
-  //
-  else {
-    promoNumberError.style.visibility = "hidden";
-    promoNumberError.textContent = "";
 
+  if (differenceMois(promoStart.value, promoEnd.value) < 4) {
+    promoDurationError.style.visibility = "visible";
+    promoDurationError.textContent = "Une promo doit durer 4 mois minimum";
+    validPromoDuration = false;
+  } else {
+    promoDurationError.style.visibility = "hidden";
+    promoDurationError.textContent = "";
+    validPromoDuration = true;
+  }
+  if (validPromoNumber == true
+      && validPromoStart == true
+    && validPromoEnd == true
+    && validPromoDuration == true)
+  {
     newPromo = {
       id: numberPromoArea.value,
-      dateDebut: promoStartDate.value,
-      dateFin: promoEndDate.value,
-    };
-    console.log(newPromo);
+      dateDebut: promoStart.value,
+      dateFin: promoEnd.value,
+    }
     promosList.push(newPromo);
     updatePromosBox();
+    console.log(newPromo);
+
+  } 
+  // 
+  else {
+    alert("Corrigez les champs en rouge");
   }
 });
 
-//----------------------------------------ADD PROMO POPUP
+//---------------------------------------- POPUP ADD PROMO
 const ouvrirPopup = document.getElementById("openPopup");
 const popup = document.getElementById("popupPromo");
 const fermerPopup = document.querySelector(".close-btn");

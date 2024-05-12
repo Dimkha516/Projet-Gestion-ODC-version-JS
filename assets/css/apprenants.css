@@ -1190,3 +1190,16 @@
 
 
 
+/* Masquer les boutons de l'input de type number */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Pour Firefox */
+/* input[type=number] {
+    -moz-appearance: textfield;
+} */
+
+

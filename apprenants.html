@@ -280,6 +280,7 @@
                   <label for="promo">N° Promo =></label>
                   <input
                     type="number"
+                    
                     placeholder="Entrer Numéro Promo"
                     id="promo"
                     class="promoNumber"
@@ -290,14 +291,15 @@
                 </div>
                 <div>
                   <label for="dateDebut">Date début =></label>
-                  <input type="date" id="date" name="dateFin" class="dateFin" />
+                  <input type="text" id="date1" name="dateDebut" placeholder="Jour/Mois/Année" class="dateDebut" />
                   <p class="promoStartError"></p>
                 </div>
                 <div>
                   <label for="dateFin">Date Fin=></label>
-                  <input type="date" id="date" name="dateFin" class="dateFin" />
+                  <input type="text" id="date2" name="dateFin" placeholder="Jour/Mois/Année" class="dateFin" />
                   <p class="promoEndError"></p>
                 </div>
+                <p class="promoDurationError"></p>
                 <button type="submit" class="btn">Ajouter</button>
               </form>
             </div>
